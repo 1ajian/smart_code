@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.seig.smartcode.web.admin.mapper.SystemUserMapper">
+    <select id="selectByUsername" resultType="cn.edu.seig.smartcode.model.entity.SystemUser">
+        select * from system_user where username = #{username}
+    </select>
+
+    <select id="page" resultType="cn.edu.seig.smartcode.model.entity.SystemUser">
+        select * from system_user
+            <where>
+                is_deleted = 0
+                <if test="userQueryVo.username != null and userQueryVo.username != ''">
+                    and username like concat('%',#{userQueryVo.username},'%')
+                </if>
+                <if test="userQueryVo.status != null">
+                    and status = #{userQueryVo.status}
+                </if>
+                <if test="userQueryVo.phone != null and userQueryVo.phone != ''">
+                    and phone like concat('%',#{userQueryVo.phone},'%')
+                </if>
+                <if test="userQueryVo.beginTime != null">
+                    and create_time &gt; #{userQueryVo.beginTime}
+                </if>
+                <if test="userQueryVo.endTime != null">
+                    and create_time &lt; #{userQueryVo.endTime}
+                </if>
+            </where>
+    </select>
+</mapper>

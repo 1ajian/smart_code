@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.seig.smartcode.web.admin.mapper.ResourceTypeMapper">
+
+<!--    <resultMap id="pageType" type="cn.edu.seig.smartcode.model.entity.ResourceType">-->
+<!--        <id column="id" property="id"/>-->
+<!--        <collection property="resourceDetailTypeList" ofType="cn.edu.seig.smartcode.model.entity.ResourceDetailType"-->
+<!--                    column="{resourceTypeId = id}" select="selectDetailType" autoMapping="true">-->
+<!--        </collection>-->
+<!--    </resultMap>-->
+
+<!--    <select id="page" resultMap="pageType">-->
+<!--        select id,-->
+<!--        type_name,-->
+<!--        upload_admin_id,-->
+<!--        create_time,-->
+<!--        update_time,-->
+<!--        is_deleted-->
+<!--        from resource_type-->
+<!--        where is_deleted = 0-->
+<!--        <if test="queryVo.typeName != null and queryVo.typeName != ''">-->
+<!--            and type_name like concat('%',#{queryVo.typeName},'%')-->
+<!--        </if>-->
+<!--    </select>-->
+
+<!--    <select id="selectDetailType" resultType="cn.edu.seig.smartcode.model.entity.ResourceDetailType">-->
+<!--        select id,-->
+<!--        resource_type_id,-->
+<!--        resource_name,-->
+<!--        upload_admin_id,-->
+<!--        create_time,-->
+<!--        update_time,-->
+<!--        is_deleted-->
+<!--        from resource_detail_type-->
+<!--        where is_deleted = 0 and resource_type_id = #{resourceTypeId}-->
+<!--         &lt;!&ndash;<if test="queryVo != null"> &ndash;&gt;-->
+<!--            <if test="queryVo.resourceName != null and queryVo.resourceName != ''">-->
+<!--                and resource_name like concat('%',#{queryVo.resourceName},'%')-->
+<!--            </if>-->
+<!--        &lt;!&ndash;</if> &ndash;&gt;-->
+<!--    </select>-->
+    <!--以上存在bug-->
+
+    <resultMap id="selectTypeAndDetailType" type="cn.edu.seig.smartcode.web.admin.vo.resource.ResourcesTypeVo" autoMapping="true">
+        <id column="id" property="id"/>
+        <collection property="resourceDetailTypeList" ofType="cn.edu.seig.smartcode.model.entity.ResourceDetailType" autoMapping="true">
+            <id property="id" column="detailTypeId"/>
+        </collection>
+    </resultMap>
+    <select id="page" resultMap="selectTypeAndDetailType">
+        select rt.id,
+               rt.type_name,
+               rt.upload_admin_id,
+               rt.create_time,
+               rt.update_time,
+               rt.is_deleted,
+               rdt.id detailTypeId,
+               rdt.resource_type_id, 
+               rdt.resource_name, 
+               rdt.upload_admin_id, 
+               rdt.create_time, 
+               rdt.update_time, 
+               rdt.is_deleted
+            from resource_type rt
+            left join resource_detail_type rdt
+                on rt.id = rdt.resource_type_id
+                and rdt.is_deleted = 0
+            where rt.is_deleted = 0
+            <if test="queryVo.typeName != null and queryVo.typeName != ''">
+                and rt.type_name like concat('%',#{queryVo.typeName},'%')
+            </if>
+            <if test="queryVo.resourceName != null and queryVo.resourceName != ''">
+                and rdt.resource_name like concat('%',#{queryVo.resourceName},'%')
+            </if>
+    </select>
+</mapper>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.seig.smartcode.web.admin.mapper.LessonTypeMapper">
+    <resultMap id="lesTypeAndTec" type="cn.edu.seig.smartcode.web.admin.vo.page.PageLesAndTecVo">
+        <id column="id" property="id"/>
+
+        <collection property="technologyStacks" ofType="cn.edu.seig.smartcode.model.entity.TechnologyStack">
+            <id property="id" column="tsid"/>
+            <result column="username" property="username"/>
+        </collection>
+    </resultMap>
+
+    <select id="page" resultMap="lesTypeAndTec">
+        select lt.id,
+               lt.type_name,
+               lt.create_admin_id,
+               lt.create_time,
+               lt.update_time,
+               lt.is_deleted,
+               t.id tsid,
+               t.technology_name,
+               t.create_admin_id,
+               t.create_time,
+               t.update_time,
+               t.is_deleted,
+               su.username
+        from lesson_type lt
+        left join type_stack ts
+            on lt.id = ts.lesson_type_id and ts.is_deleted = 0
+        left join technology_stack t
+            on ts.technology_stack_id = t.id and t.is_deleted = 0
+        join system_user su on su.id = t.create_admin_id and su.is_deleted = 0
+        <where>
+            lt.is_deleted = 0
+            <if test="pageQueryVo.typeName != null and pageQueryVo.typeName != ''">
+                and lt.type_name like concat('%',#{pageQueryVo.typeName},'%')
+            </if>
+            <if test="pageQueryVo.technologyName != null and pageQueryVo.technologyName != ''">
+                and t.technology_name like concat('%',#{pageQueryVo.technologyName},'%')
+            </if>
+        </where>
+    </select>
+</mapper>

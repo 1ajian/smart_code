@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.seig.smartcode.web.admin.mapper.CarouselMapper">
+
+    <resultMap id="BaseResultMap" type="cn.edu.seig.smartcode.model.entity.Carousel">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="imageUrl" column="image_url" jdbcType="VARCHAR"/>
+            <result property="wechatLink" column="wechat_link" jdbcType="VARCHAR"/>
+            <result property="createAdminId" column="create_admin_id" jdbcType="BIGINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,image_url,wechat_link,
+        create_admin_id,create_time,update_time,
+        is_deleted
+    </sql>
+</mapper>

@@ -1,0 +1,54 @@
+﻿server:
+  port: 8080
+
+spring:
+  profiles:
+    active: dev
+
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://${smartcode.datasource.host}:${smartcode.datasource.port}/${smartcode.datasource.database}?useUnicode=true&characterEncoding=utf-8&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=GMT%2b8
+    username: ${smartcode.datasource.username}
+    password: ${smartcode.datasource.password}
+    hikari:
+      connection-test-query: SELECT 1
+      connection-timeout: 60000
+      idle-timeout: 500000
+      max-lifetime: 540000
+      maximum-pool-size: 12
+      minimum-idle: 10
+      pool-name: SPHHikariPool
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+
+  data:
+    redis:
+      database: ${smartcode.redis.database}
+      host: ${smartcode.redis.host}
+      port: ${smartcode.redis.port}
+
+#用于打印框架生成的sql语句，便于调试
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    auto-mapping-behavior: full
+    map-underscore-to-camel-case: true
+  type-aliases-package: cn.edu.seig.smartcode.model.entity
+
+# 别拿我阿里云的所有数据去开发，大家自家登阿里云官网查看
+aliyun:
+  oss:
+    access-key-id: ${smartcode.oss.access-key-id}
+    access-key-secret: ${smartcode.oss.access-key-secret}
+    bucket-name: ${smartcode.oss.bucket-name}
+    endpoint: ${smartcode.oss.endpoint}
+
+  sms:
+    access-key-id: ${smartcode.sms.access-key-id}
+    access-key-secret: ${smartcode.sms.access-key-secret}
+    endpoint: ${smartcode.sms.endpoint}
+
+springdoc:
+  default-flat-param-object: true
+

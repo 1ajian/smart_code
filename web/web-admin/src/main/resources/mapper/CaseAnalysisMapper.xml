@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.seig.smartcode.web.admin.mapper.CaseAnalysisMapper">
+
+    <select id="page" resultType="cn.edu.seig.smartcode.web.admin.vo.caseanalysis.CaseAnalysisVo">
+        select ca.id,
+               ca.user_id,
+               ca.title,
+               ca.content,
+               ca.case_url,
+               ca.create_time,
+               ca.update_time,
+               ca.is_deleted,
+               ui.nickname
+        from case_analysis ca
+                 left join user_info ui on ca.user_id = ui.id and ui.is_deleted = 0
+        where ca.is_deleted = 0
+        <if test="queryVo.nickname != null and queryVo.nickname != ''">
+            and ui.nickname like concat('%',#{queryVo.nickname},'%')
+        </if>
+        <if test="queryVo.title != null and queryVo.title != ''">
+            and ca.title like concat('%',#{queryVo.title},'%')
+        </if>
+        <if test="queryVo.content != null and queryVo.content != ''">
+            and ca.content like concat('%',#{queryVo.content},'%')
+        </if>
+        <if test="queryVo.beginTime != null">
+            and ca.create_time &gt; #{queryVo.beginTime}
+        </if>
+        <if test="queryVo.endTime != null">
+            and ca.create_time &lt; #{queryVo.endTime}
+        </if>
+    </select>
+</mapper>

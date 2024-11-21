@@ -1,0 +1,52 @@
+{
+  "groups": [
+    {
+      "name": "aliyun.oss",
+      "type": "cn.edu.seig.smartcode.common.oss.AliOssProperties",
+      "sourceType": "cn.edu.seig.smartcode.common.oss.AliOssProperties"
+    },
+    {
+      "name": "aliyun.sms",
+      "type": "cn.edu.seig.smartcode.common.sms.AliyunSMSProperties",
+      "sourceType": "cn.edu.seig.smartcode.common.sms.AliyunSMSProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "aliyun.oss.access-key-id",
+      "type": "java.lang.String",
+      "sourceType": "cn.edu.seig.smartcode.common.oss.AliOssProperties"
+    },
+    {
+      "name": "aliyun.oss.access-key-secret",
+      "type": "java.lang.String",
+      "sourceType": "cn.edu.seig.smartcode.common.oss.AliOssProperties"
+    },
+    {
+      "name": "aliyun.oss.bucket-name",
+      "type": "java.lang.String",
+      "sourceType": "cn.edu.seig.smartcode.common.oss.AliOssProperties"
+    },
+    {
+      "name": "aliyun.oss.endpoint",
+      "type": "java.lang.String",
+      "sourceType": "cn.edu.seig.smartcode.common.oss.AliOssProperties"
+    },
+    {
+      "name": "aliyun.sms.access-key-id",
+      "type": "java.lang.String",
+      "sourceType": "cn.edu.seig.smartcode.common.sms.AliyunSMSProperties"
+    },
+    {
+      "name": "aliyun.sms.access-key-secret",
+      "type": "java.lang.String",
+      "sourceType": "cn.edu.seig.smartcode.common.sms.AliyunSMSProperties"
+    },
+    {
+      "name": "aliyun.sms.endpoint",
+      "type": "java.lang.String",
+      "sourceType": "cn.edu.seig.smartcode.common.sms.AliyunSMSProperties"
+    }
+  ],
+  "hints": []
+}

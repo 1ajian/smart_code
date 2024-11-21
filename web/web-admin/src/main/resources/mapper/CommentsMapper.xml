@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.seig.smartcode.web.admin.mapper.CommentsMapper">
+
+    <resultMap id="BaseResultMap" type="cn.edu.seig.smartcode.model.entity.Comments">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="articleType" column="article_type" jdbcType="TINYINT"/>
+            <result property="content" column="content" jdbcType="VARCHAR"/>
+            <result property="commentUserId" column="comment_user_id" jdbcType="BIGINT"/>
+            <result property="articleid" column="articleId" jdbcType="BIGINT"/>
+            <result property="topLevelId" column="top_level_id" jdbcType="BIGINT"/>
+            <result property="replyTargetId" column="reply_target_id" jdbcType="BIGINT"/>
+            <result property="likeCount" column="like_count" jdbcType="BIGINT"/>
+            <result property="communicationId" column="communication_id" jdbcType="BIGINT"/>
+            <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+            <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+            <result property="isDeleted" column="is_deleted" jdbcType="TINYINT"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,article_type,content,
+        comment_user_id,articleId,top_level_id,
+        reply_target_id,like_count,communication_id,
+        create_time,update_time,is_deleted
+    </sql>
+</mapper>

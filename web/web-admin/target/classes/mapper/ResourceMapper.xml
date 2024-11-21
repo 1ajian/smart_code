@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.seig.smartcode.web.admin.mapper.ResourceMapper">
+    <select id="page" resultType="resource">
+        select * from resource
+        <where>
+            is_deleted = 0
+                <if test="pageQueryVo.name != null and pageQueryVo.name != ''">
+                    and name like concat('%',#{pageQueryVo.name},'%')
+                </if>
+                <if test="pageQueryVo.uploadAdminId != null">
+                    and upload_admin_id = #{pageQueryVo.uploadAdminId}
+                </if>
+                <if test="pageQueryVo.createTime != null">
+                    and create_time &gt; #{pageQueryVo.createTime}
+                </if>
+                <if test="pageQueryVo.endTime != null">
+                    and create_time &lt; #{pageQueryVo.endTime}
+                </if>
+                <if test="pageQueryVo.resourceTypeId != null">
+                    and resource_type_id = #{pageQueryVo.resourceTypeId}
+                </if>
+                <if test="pageQueryVo.resourceDetailTypeId != null">
+                    and resource_detail_type = #{pageQueryVo.resourceDetailTypeId}
+                </if>
+            </where>
+    </select>
+
+</mapper>

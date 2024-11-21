@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.seig.smartcode.web.admin.mapper.TechnologyStackMapper">
+
+    <select id="getByTypeId" resultType="cn.edu.seig.smartcode.model.entity.TechnologyStack">
+        select *
+        from technology_stack
+        where id in (select technology_stack_id from type_stack where lesson_type_id = #{id} and is_deleted = 0)
+        and is_deleted = 0
+    </select>
+</mapper>

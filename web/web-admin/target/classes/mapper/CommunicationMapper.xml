@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.seig.smartcode.web.admin.mapper.CommunicationMapper">
+
+    <select id="page" resultType="cn.edu.seig.smartcode.web.admin.vo.communication.CommunicationVo">
+        select c.id,
+               title,
+               content,
+               comments_count,
+               like_number,
+               collect_count,
+               share_count,
+               user_id,
+               communication_type_id,
+               c.create_time,
+               c.update_time,
+               c.is_deleted,
+               ct.name typename,
+               ui.nickname
+        from communication c
+                 left join communication_type ct on c.communication_type_id = ct.id and ct.is_deleted = 0
+                left join user_info ui on c.user_id = ui.id and ui.is_deleted = 0
+        where c.is_deleted = 0
+        <if test="queryVo.nickname != null and queryVo.nickname != ''">
+            and ui.nickname like concat('%',#{queryVo.nickname},'%')
+        </if>
+        <if test="queryVo.content != null and queryVo.content != ''">
+            and c.content like concat('%',#{queryVo.content},'%')
+        </if>
+        <if test="queryVo.title != null and queryVo.title != ''">
+            and c.title like  concat('%',#{queryVo.title},'%')
+        </if>
+        <if test="queryVo.beginTime != null">
+            and c.create_time &gt; #{queryVo.beginTime}
+        </if>
+        <if test="queryVo.endTime != null">
+            and c.create_time &lt; #{queryVo.endTime}
+        </if>
+        <if test="queryVo.communicationTypeId != null">
+            and c.communication_type_id = #{queryVo.communicationTypeId}
+        </if>
+    </select>
+</mapper>

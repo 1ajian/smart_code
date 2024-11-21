@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.edu.seig.smartcode.web.admin.mapper.StudyWayMapper">
+    <select id="page" resultType="cn.edu.seig.smartcode.web.admin.vo.page.PageWayLessonVo">
+        select ts.id,
+        ts.technology_name,
+        ts.create_admin_id,
+        ts.create_time,
+        ts.update_time,
+        ts.is_deleted,
+        su.username
+        from technology_stack ts
+        left join system_user su on su.id = ts.create_admin_id and su.is_deleted = 0
+        where ts.is_deleted = 0
+        and ts.id in
+        (select ws.stack_id
+        from way_stack ws
+        where ws.way_id = #{queryVo.wayId}
+        and ws.is_deleted = 0)
+        <if test="queryVo.technologyName != null and queryVo.technologyName != ''">
+            and ts.technology_name like concat('%',#{queryVo.technologyName},'%')
+        </if>
+        <if test="queryVo.username != null and queryVo.username != ''">
+            and su.username like concat('%',#{queryVo.username},'%')
+        </if>
+        <if test="queryVo.beginTime != null">
+            and ts.create_time &gt; #{queryVo.beginTime}
+        </if>
+        <if test="queryVo.endTime != null">
+            and ts.create_time &lt; #{queryVo.endTime}
+        </if>
+    </select>
+
+</mapper>
