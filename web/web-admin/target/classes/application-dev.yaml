@@ -18,7 +18,7 @@ smartcode:
     endpoint: oss-cn-guangzhou.aliyuncs.com
 
   sms:
-    access-key-id: LTAI5tB1PjM9k3nzMEQrALxW
-    access-key-secret: rAJrBgXnou77cYa1HsZXQD6adpRP0n
+    access-key-id: LTAI5tBv3vxGYizMDfxqYyyu
+    access-key-secret: rDpmVF229Z7wVowFK9tVHAzGqJS5zB
     endpoint: dysmsapi.aliyuncs.com
 

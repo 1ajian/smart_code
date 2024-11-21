@@ -4,7 +4,7 @@ smartcode:
     port: 3306
     database: smart_code
     username: root
-    password: Atguigu.123
+    password: *******
 
   redis:
     host: 192.168.232.101
@@ -12,13 +12,13 @@ smartcode:
     database: 1
 
   oss:
-    access-key-id: LTAI5tBzAd9N7xL4LTYcRY76
-    access-key-secret: tWLkG7BJovMY8thJ5ncKJlrUCAAEu7
-    bucket-name: smart-code
-    endpoint: oss-cn-guangzhou.aliyuncs.com
+    access-key-id: ************
+    access-key-secret: **********
+    bucket-name: ***********
+    endpoint: ***********
 
   sms:
-    access-key-id: LTAI5tB1PjM9k3nzMEQrALxW
-    access-key-secret: rAJrBgXnou77cYa1HsZXQD6adpRP0n
-    endpoint: dysmsapi.aliyuncs.com
+    access-key-id: ***********
+    access-key-secret: ************
+    endpoint: ***************
 
